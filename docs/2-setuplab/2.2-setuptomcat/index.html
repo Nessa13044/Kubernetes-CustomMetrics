@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.131.0">
+    <meta name="description" content="">
+<meta name="author" content="thanhnhan4770@gmail.com">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Setup Tomcat :: AWS System Manager</title>
+
+    
+    <link href="/css/nucleus.css?1727014810" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1727014810" rel="stylesheet">
+    <link href="/css/hybrid.css?1727014810" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1727014810" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1727014810" rel="stylesheet">
+    <link href="/css/auto-complete.css?1727014810" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1727014810" rel="stylesheet">
+    <link href="/css/theme.css?1727014810" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1727014810" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1727014810" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1727014810"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/2-setuplab/2.2-setuptomcat/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1727014810"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1727014810"></script>
+<script type="text/javascript">
+    
+        var baseurl = "\/\/localhost:1313\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1727014810"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-kubernetesarchitecture/" title="Kubernetes Architecture" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-kubernetesarchitecture/">
+           <b> 1. </b> Kubernetes Architecture
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-kubernetesarchitecture/1.1-kubernetescomponents/" title="Kubernetes Components" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-kubernetesarchitecture/1.1-kubernetescomponents/">
+           <b> 1.1 </b> Kubernetes Components
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-kubernetesarchitecture/1.2-kubernetesnetworking/" title="Kubernetes Networking" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-kubernetesarchitecture/1.2-kubernetesnetworking/">
+           <b> 1.2 </b> Kubernetes Networking
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-kubernetesarchitecture/1.3-cilium/" title="Cilium" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-kubernetesarchitecture/1.3-cilium/">
+           <b> 1.3 </b> Cilium
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-setuplab/" title="Setup Lab" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/2-setuplab/">
+           <b> 2 </b> Setup Lab
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-setuplab/2.1-createkubernetescluster/" title="Create Kubernetes Cluster" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-setuplab/2.1-createkubernetescluster/">
+           <b> 2.1 </b> Create Kubernetes Cluster
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-setuplab/2.2-setuptomcat/" title="Setup Tomcat" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/2-setuplab/2.2-setuptomcat/">
+           <b> 2.2 </b> Setup Tomcat
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-accessibilitytoinstances/" title="Monitoring" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-accessibilitytoinstances/">
+           <b> 3. </b> Monitoring
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-accessibilitytoinstances/3.1-prometheus/" title="Prometheus" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-accessibilitytoinstances/3.1-prometheus/">
+           <b> 3.1. </b> Prometheus
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-accessibilitytoinstances/3.2-metric-server/" title="Prometheus - Adapter" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-accessibilitytoinstances/3.2-metric-server/">
+           <b> 3.2. </b> Prometheus - Adapter
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-accessibilitytoinstances/3.3-hpa/" title="Horizontal Pod Autoscaling - HPA" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-accessibilitytoinstances/3.3-hpa/">
+           <b> 3.3. </b> Horizontal Pod Autoscaling - HPA
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-accessibilitytoinstances/3.4-demo/" title="Demo" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-accessibilitytoinstances/3.4-demo/">
+           <b> 3.4. </b> Demo
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-cleanup/" title="Clean up resources" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-cleanup/">
+          <b>4. </b>Clean up resources
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj/"><i class='fab fa-facebook'></i> AWS Study Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="en" value="//localhost:1313/2-setuplab/2.2-setuptomcat/" selected>English</option>
+                    
+                  
+              
+          
+              
+              
+                  
+                    
+                    
+                      <option id="vi" value="//localhost:1313/vi/2-setuplab/2.2-setuptomcat/"></option>
+                    
+                  
+              
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>30-01-2022</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i> <a href="https://www.linkedin.com/in/sutrinh/"  style="color:orange">Sử Trịnh  </a> <br>
+                <a href="https://www.linkedin.com/in/jotaguy"  style="color:orange">Gia Hưng </a> <br>
+                <a href="https://www.linkedin.com/in/hiepnguyendt"  style="color:orange">Thanh Hiệp </a>
+               
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Session Management</a> > <a href='/2-setuplab/'>Setup Lab</a> > Setup Tomcat
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Setup Tomcat
+            </h1>
+          
+
+        
+
+
+
+	
+<div class="notices info" ><p>You must create your own Docker Hub account to use as a place to store images for kubernetes.</p>
+</div>
+
+<ul>
+<li>in this lab i will use tomcat metrics to condition scaling in kubernetes and to get that information i will use <strong>JMX Exporter</strong></li>
+<li><strong>What&rsquo;s JMX Exporter</strong>, Prometheus JMX Exporter is also a Java agent, which is capable of accessing the MBean server to access the data and transform that data into the Prometheus metric format. Prometheus then scrapes the metrics from the JMX Exporter&rsquo;s default metric storage path, which is /metrics.</li>
+<li>If you are curious, I have written a tomcat setup file, you can run it on your linux machine to see what information JMX Exporter gets from tomcat.</li>
+</ul>
+<pre tabindex="0"><code>#!/bin/bash
+install_jdk() {
+    wget https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz
+    tar xzvf openjdk-11_linux-x64_bin.tar.gz
+    mv jdk-11 /opt/
+    update-alternatives --install /usr/bin/java java /opt/jdk-11/bin/java 1
+    update-alternatives --install /usr/bin/javac javac /opt/jdk-11/bin/javac 1
+    
+}
+
+install_tomcat() {
+
+    mkdir -p /opt/tomcat     
+    wget -c https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.62/bin/apache-tomcat-9.0.62.tar.gz 
+    tar xzvf apache-tomcat-9.0.62.tar.gz -C /opt/tomcat/ --strip-components=1
+
+    groupadd tomcat
+    useradd --no-create-home --shell /bin/false tomcat -g tomcat
+
+    chown -R tomcat:tomcat /opt/tomcat/
+    
+    cat &lt;&lt;EOF &gt; /opt/tomcat/prometheus.yml
+---
+lowercaseOutputLabelNames: true
+lowercaseOutputName: true
+rules:
+- pattern: &#39;Catalina&lt;type=GlobalRequestProcessor, name=\&#34;(\w+-\w+)-(\d+)\&#34;&gt;&lt;&gt;(\w+):&#39;
+  name: tomcat_\$3_total
+  labels:
+    port: &#34;\$2&#34;
+    protocol: &#34;\$1&#34;
+  help: Tomcat global \$3
+  type: COUNTER
+- pattern: &#39;Catalina&lt;j2eeType=Servlet, WebModule=//([-a-zA-Z0-9+&amp;@#/%?=~_|!:.,;]*[-a-zA-Z0-9+&amp;@#/%=~_|]), name=([-a-zA-Z0-9+/$%~_-|!.]*), J2EEApplication=none, J2EEServer=none&gt;&lt;&gt;(requestCount|maxTime|processingTime|errorCount):&#39;
+  name: tomcat_servlet_\$3_total
+  labels:
+    module: &#34;\$1&#34;
+    servlet: &#34;\$2&#34;
+  help: Tomcat servlet \$3 total
+  type: COUNTER
+- pattern: &#39;Catalina&lt;type=ThreadPool, name=&#34;(\w+-\w+)-(\d+)&#34;&gt;&lt;&gt;(currentThreadCount|currentThreadsBusy|keepAliveCount|pollerThreadCount|connectionCount):&#39;
+  name: tomcat_threadpool_\$3
+  labels:
+    port: &#34;\$2&#34;
+    protocol: &#34;\$1&#34;
+  help: Tomcat threadpool \$3
+  type: GAUGE
+- pattern: &#39;Catalina&lt;type=Manager, host=([-a-zA-Z0-9+&amp;@#/%?=~_|!:.,;]*[-a-zA-Z0-9+&amp;@#/%=~_|]), context=([-a-zA-Z0-9+/$%~_-|!.]*)&gt;&lt;&gt;(processingTime|sessionCounter|rejectedSessions|expiredSessions):&#39;
+  name: tomcat_session_\$3_total
+  labels:
+    context: &#34;\$2&#34;
+    host: &#34;\$1&#34;
+  help: Tomcat session \$3 total
+  type: COUNTER
+- pattern: &#39;java.lang&lt;type=OperatingSystem&gt;&lt;&gt;(committed_virtual_memory|free_physical_memory|free_swap_space|total_physical_memory|total_swap_space)_size:&#39;
+  name: os_\$1_bytes
+  type: GAUGE
+  attrNameSnakeCase: true
+- pattern: &#39;java.lang&lt;type=OperatingSystem&gt;&lt;&gt;((?!process_cpu_time)\w+):&#39;
+  name: os_\$1
+  type: GAUGE
+  attrNameSnakeCase: true
+
+EOF
+
+    cat &lt;&lt;EOF &gt; /opt/tomcat/bin/setenv.sh
+CATALINA_OPTS=&#34;\$CATALINA_OPTS -javaagent:/opt/jmx_prometheus_javaagent-0.19.0.jar=8182:/opt/tomcat/prometheus.yml&#34;
+Environment=JAVA_HOME=/opt/jdk-11
+export JAVA_HOME=/opt/jdk-11
+EOF
+
+    wget https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.19.0/jmx_prometheus_javaagent-0.19.0.jar
+    mv jmx_prometheus_javaagent-0.19.0.jar /opt/
+
+
+}
+install_jdk
+install_tomcat
+</code></pre><ul>
+<li>Run this command to start tomcat server.</li>
+</ul>
+<pre tabindex="0"><code>/opt/tomcat/bin/startup.sh
+</code></pre>
+<div class="notices info" ><p>Tomcat run on port 8080 and metrics expose on port 8182.</p>
+</div>
+
+<ul>
+<li>Metrics will look like this:
+<img alt="jmx" src="/images/2.prerequisite/jmx.png"></li>
+</ul>
+<h4 id="create-tomcat-images">Create Tomcat Images.</h4>
+<ul>
+<li>Your machine has Docker installed.</li>
+<li>Next, execute the command below to create the directory and Dockerfile.</li>
+</ul>
+<pre tabindex="0"><code>mkdir tomcat
+cd tomcat
+#Prepare the necessary files. Versions may vary depending on your purpose.
+wget https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz
+wget -c https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.62/bin/apache-tomcat-9.0.62.tar.gz
+wget https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/0.19.0/jmx_prometheus_javaagent-0.19.0.jar
+touch Dockerfile
+</code></pre><ul>
+<li>Add the lines below to Dockerfile</li>
+</ul>
+<pre tabindex="0"><code>FROM ubuntu:20.04
+RUN apt-get update &amp;&amp; apt-get install -y tar \
+    &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+COPY openjdk-11_linux-x64_bin.tar.gz /tmp/
+RUN mkdir -p /opt/jdk-11 \
+    &amp;&amp; tar xzvf /tmp/openjdk-11_linux-x64_bin.tar.gz -C /opt/jdk-11/ --strip-components=1 \
+    &amp;&amp; update-alternatives --install /usr/bin/java java /opt/jdk-11/bin/java 1 \
+    &amp;&amp; update-alternatives --install /usr/bin/javac javac /opt/jdk-11/bin/javac 1 
+
+COPY apache-tomcat-9.0.62.tar.gz /tmp/ 
+RUN mkdir -p /opt/tomcat \
+    &amp;&amp; tar xzvf /tmp/apache-tomcat-9.0.62.tar.gz -C /opt/tomcat/ --strip-components=1 
+
+RUN groupadd tomcat \
+    &amp;&amp; useradd --no-create-home --shell /bin/false tomcat -g tomcat \
+    &amp;&amp; chown -R tomcat:tomcat /opt/tomcat/
+
+COPY prometheus.yml /opt/tomcat/
+COPY setenv.sh /opt/tomcat/bin/
+
+COPY jmx_prometheus_javaagent-0.19.0.jar /opt/
+EXPOSE 8182 8080
+CMD [&#34;/opt/tomcat/bin/catalina.sh&#34;, &#34;run&#34;]
+</code></pre><ul>
+<li>Create Docker image using the following command:</li>
+</ul>
+<pre tabindex="0"><code>docker build -t my-tomcat-image .
+</code></pre><ul>
+<li>
+<p>Image created successfully.
+<img alt="images" src="/images/2.prerequisite/images.png"></p>
+</li>
+<li>
+<p>In your machine, login on your Docker Hub. You will be asked to enter a username and password. The password will be encrypted and stored locally.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>docker login
+</code></pre><ul>
+<li>Tag images with names in Docker Hub.</li>
+</ul>
+<pre tabindex="0"><code>#docker tag &lt;image_id&gt; &lt;dockerhub_username&gt;/&lt;repository_name&gt;:&lt;tag&gt;
+docker tag 282612a56d35 nessa13044/tomcat-k8s:v1
+</code></pre><ul>
+<li>Push Image to Docker Hub.</li>
+</ul>
+<pre tabindex="0"><code>docker push nessa13044/tomcat-k8s:v1
+</code></pre><ul>
+<li>check images are ready on Docker Hub.
+<img alt="docker" src="/images/2.prerequisite/docker-1.png"></li>
+</ul>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/2-setuplab/2.1-createkubernetescluster/" title="Create Kubernetes Cluster"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/3-accessibilitytoinstances/" title="Monitoring" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1727014810"></script>
+    <script src="/js/perfect-scrollbar.min.js?1727014810"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1727014810"></script>
+    <script src="/js/jquery.sticky.js?1727014810"></script>
+    <script src="/js/featherlight.min.js?1727014810"></script>
+    <script src="/js/highlight.pack.js?1727014810"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1727014810"></script>
+    <script src="/js/learn.js?1727014810"></script>
+    <script src="/js/hugo-learn.js?1727014810"></script>
+
+    <link href="/mermaid/mermaid.css?1727014810" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1727014810"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
